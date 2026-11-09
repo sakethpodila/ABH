@@ -2,13 +2,15 @@
 
 ## Read first
 
-The application is in `anu-bake-house/`. Before changing it, read:
-1. `anu-bake-house/docs/PROJECT_CONTEXT.md` — approved scope and business facts.
-2. `anu-bake-house/docs/STATUS.md` — what exists, validation, and next work.
-3. `anu-bake-house/docs/ARCHITECTURE.md` — architecture and data boundaries.
-4. `anu-bake-house/docs/DECISIONS.md` — accepted decisions and unresolved questions.
+This directory, `anu-bake-house/`, is the repository and application root. Before changing it, read:
+1. `docs/PROJECT_CONTEXT.md` — approved scope and business facts.
+2. `docs/STATUS.md` — what exists, validation, and next work.
+3. `docs/ARCHITECTURE.md` — architecture and data boundaries.
+4. `docs/DECISIONS.md` — accepted decisions and unresolved questions.
 
 These files are project memory, not a substitute for checking current code. A new chat must read them; chat history does not automatically transfer. Explicit current user instructions take precedence.
+
+Keep README.md focused on conventional developer onboarding: requirements, installation, environment configuration, local storage, commands, and troubleshooting. Agent instructions, chat handoffs, decision history, and task progress belong in AGENTS.md and docs/, not in README.md.
 
 ## Collaboration and scope
 
@@ -34,6 +36,6 @@ These files are project memory, not a substitute for checking current code. A ne
 
 ## Validation and handoff
 
-From `anu-bake-house/`, run appropriate checks: `npm run check`, `npm test`, `npm run build`; run local D1 migrations when schema changes. Tests should cover important logic/security rather than mirror UI implementation.
+From the repository root, run appropriate checks: `npm run check`, `npm test`, `npm run build`; run local D1 migrations when schema changes. Tests should cover important logic/security rather than mirror UI implementation.
 
 After every substantive change, update `docs/STATUS.md` and its validation results. Record changed decisions in `docs/DECISIONS.md`; update architecture/context only when those facts change. Keep these documents concise and consistent; do not save secrets, personal admin emails, tokens, or entire chat transcripts. Finish by stating what works and what is still scaffolding.

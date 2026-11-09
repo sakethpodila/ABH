@@ -1,6 +1,10 @@
 # Project context
 
-Last reviewed: 2026-11-08 (Asia/Calcutta).
+Last reviewed: 2026-11-09 (Asia/Calcutta).
+
+## Repository and context entry point
+
+`anu-bake-house/` is the standalone Git repository and application root. Open that directory as the project for future work. Its `AGENTS.md` contains the complete working instructions and points directly to this file, STATUS.md, ARCHITECTURE.md, and DECISIONS.md under `docs/`; no parent-directory instruction file is required. README.md is the developer setup guide, not the agent-context entry point.
 
 ## Business and assets
 

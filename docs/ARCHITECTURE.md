@@ -12,6 +12,8 @@ Administrator -> Cloudflare Access -> middleware -> private React workspace/API
 
 ## Code boundaries
 
+The application directory is also the Git repository root. `AGENTS.md`, `README.md`, `package.json`, configuration, and `docs/` live together at that root; there is no outer-repository setup or parent AGENTS dependency.
+
 - `src/config/`: non-secret public brand configuration.
 - `src/layouts/`, `src/styles/`: shared layout, design tokens, responsive rules.
 - `src/components/`: React islands; no server/database/credential imports.

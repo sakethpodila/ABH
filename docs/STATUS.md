@@ -2,6 +2,21 @@
 
 Milestone: local menu management, uploads, and publishing. Date: 2026-11-08, Asia/Calcutta.
 
+## Repository-root consolidation — 2026-11-09
+
+- Consolidated the full working instructions into the application's AGENTS.md, with direct docs/ paths and no parent-file dependency. Retained one developer README and corrected setup commands to run from the same root.
+- Removed the duplicate parent ABH/AGENTS.md and ABH/README.md. The target Git repository root is anu-bake-house; source, local environment, D1/R2 state, assets, dependencies, and build paths stay in place.
+- Moved Git metadata into anu-bake-house and re-rooted the index to the existing application subtree. Original HEAD `0a0f33143879aae2cfbfa15f8cbfd9db3e023d41` and its history are preserved; no commit was rewritten or created. Structural moves and updated root/context documentation are staged for review; no push was made. A verified pre-consolidation history bundle and index backup are retained under ignored outputs/.
+- Future chats should open anu-bake-house as the project and read its root AGENTS.md. Existing context documents remain under docs/.
+- Validation: Git reports anu-bake-house as its root; the outer folder contains only that directory. Confirmed one indexed root AGENTS.md/README.md, all four context files reachable directly, three README links valid, and setup script names valid. Application code/assets/migrations match the original committed subtree, and local secrets/data/dependencies/outputs remain ignored and in place. Git integrity and staged/working whitespace checks passed; all 24 tests passed from the new root. No application/schema/runtime changes or deployment.
+
+## Developer setup documentation — 2026-11-09
+
+- Rewrote root README as the repository quick start and application README as the detailed developer setup reference. Removed agent/chat handoff instructions from both; AGENTS.md and existing context documents retain that responsibility.
+- Setup now documents Node/npm requirements, reproducible installation, non-overwriting .dev.vars creation on PowerShell/macOS/Linux, all environment settings, local-only admin preview, migrations and persistent D1/R2 state, the implemented menu flow, checks/build/preview, common failures, and pending production configuration.
+- Corrected stale README claims that the public menu and private Menu screen were placeholders. Other business-workflow limitations remain explicit.
+- Validation: both READMEs checked for balanced code fences and absence of agent/chat handoff instructions; all four relative links resolve, all seven referenced npm run scripts exist, and all five environment-template variables are documented. Commands and behaviour match current configuration/routes/helpers. `git diff --check` passed. No application code, environment values, database records, or dependencies changed; application tests/build were not rerun for this documentation-only change.
+
 ## Theme setting — 2026-11-08
 
 - Changed the theme control into a pill-shaped sliding switch with a cupcake/chocolate thumb. Uses accessible switch semantics and preserves the existing saved preference; reduced motion disables the slide transition.
@@ -74,7 +89,7 @@ Only the Menu section has a business workflow. Other workspace sections remain p
 
 ## Local environment / repository
 
-- Git initialized at workspace root `ABH`, branch `main`; no commits, remote, or pushes created.
+- Repository root is `anu-bake-house`, branch `main`. Existing Git history is retained; no remote is configured. Root consolidation creates no new commit or push.
 - An ignored `.dev.vars` enables the explicit local-only UI preview on this machine. The distributed `.dev.vars.example` defaults it to false. Built/production code cannot use that preview switch.
 - Astro's local tooling copies `.dev.vars` into ignored build output for preview. Do not publish the build directory as a static dump or put real secret values into source; review the production deployment path separately.
 - The pre-existing dev server at `http://127.0.0.1:4321` was left running for user review; choose Menu in `/admin`. The separate production-preview server used for validation was stopped afterward.

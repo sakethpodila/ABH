@@ -4,6 +4,8 @@
 
 | Date | Decision | Reason |
 | --- | --- | --- |
+| 2026-11-09 | Make anu-bake-house the standalone repository root, retaining one self-contained AGENTS.md and one setup README.md | User requested removal of the outer ABH documents and duplicate project layer while preserving context retrieval and Git history |
+| 2026-11-09 | Reserve root/application READMEs for developer setup and usage; keep agent instructions and continuing-chat context in AGENTS.md and docs/ | User requested conventional onboarding documentation instead of agentic context in README.md |
 | 2026-11-08 | Add light/dark setting across public and private pages, stored in the browser | User requested a top-right cupcake/chocolate toggle and brand-matched dark colours; system preference supplies the initial theme |
 | 2026-11-08 | Use Balium Filled for public menu title, category headings, and product names; Amarna for other text and pages | Corrected the earlier interpretation of the user's annotated font exceptions |
 | 2026-11-08 | Use the supplied Balium demo font on local public menu display text; retain its license and review web distribution before launch | The user supplied the font for the menu, while its license restricts redistribution and the filename identifies it as a demo with bad kerning |
