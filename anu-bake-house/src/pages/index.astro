@@ -1,0 +1,18 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CollectionPreview from '../components/CollectionPreview';
+import HeroGallery from '../components/HeroGallery';
+import { brand } from '../config/brand';
+---
+<BaseLayout title="Homemade just for you">
+  <main id="main">
+    <section class="hero container" aria-labelledby="hero-heading">
+      <div class="hero-copy"><p class="eyebrow"><span aria-hidden="true">✳</span> Welcome to Anu’s kitchen</p><h1 id="hero-heading">A little joy,<br /><em>freshly baked.</em></h1><p class="lede">For big celebrations, small cravings, and everything in between. A little something homemade, just for you.</p><a class="button" href="/menu">Explore our menu <span aria-hidden="true">→</span></a><p class="order-note">{brand.advanceNotice}</p></div>
+      <HeroGallery client:load />
+    </section>
+    <div class="baking-ribbon" aria-hidden="true"><span>Homemade just for you</span><span>✳</span><span>From Anu’s kitchen</span><span>✳</span><span>Little moments of joy</span></div>
+    <CollectionPreview client:visible />
+    <section class="story-strip container"><img src="/images/anu.png" alt="Anu’s illustrated mascot wearing an apron and holding baking utensils" width="140" height="140" loading="lazy" /><div><p class="eyebrow">The heart of the bake house</p><h2>Meet Anu’s kitchen.</h2><p>A home for cakes, baked treats, and familiar kitchen favourites. Browse a little, find something you love, and chat with us to make it yours.</p></div></section>
+  </main>
+</BaseLayout>

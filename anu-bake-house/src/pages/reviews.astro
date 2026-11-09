@@ -1,0 +1,8 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { brand } from '../config/brand';
+---
+<BaseLayout title="Kind words">
+  <main id="main" class="page-content container"><p class="eyebrow">Little notes from our customers</p><h1>Kind words,<br /><em>sweet memories.</em></h1><p class="lede">Our customer review space is coming soon. You’ll be able to leave a review here without creating an account.</p><p>Until then, find our customer-review highlights on Instagram.</p><a class="button" href={brand.instagram} target="_blank" rel="noopener noreferrer">Visit our Instagram ↗</a></main>
+</BaseLayout>

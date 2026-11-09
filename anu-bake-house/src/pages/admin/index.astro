@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkspaceShell from '../../components/WorkspaceShell';
+if (!Astro.locals.admin) return new Response('Administrator sign-in is required.', { status: 401 });
+---
+<BaseLayout title="Business workspace" workspace>
+  <WorkspaceShell localPreview={Astro.locals.admin.localPreview} client:load />
+</BaseLayout>

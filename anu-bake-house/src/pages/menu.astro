@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { brand } from '../config/brand';
+import { env } from 'cloudflare:workers';
+import { getPublishedMenu } from '../server/public-menu';
+import type { PublicMenuProduct } from '../business/menu';
+import PublicMenuCard from '../components/PublicMenuCard';
+import { menuFilterChoices, filterMenuProducts, menuLabelKey } from '../business/menu-tags';
+Astro.response.headers.set('Cache-Control', 'no-store');
+let products: PublicMenuProduct[] = [];
+let unavailable = false;
+try {
+  if (!env.DB) throw new Error('Missing menu storage');
+  products = await getPublishedMenu(env.DB);
+} catch { unavailable = true; Astro.response.status = 503; }
+const choices = menuFilterChoices(products);
+const selectedCategory = Astro.url.searchParams.get('category');
+const selectedTag = Astro.url.searchParams.get('tag');
+const visibleProducts = filterMenuProducts(products, selectedCategory, selectedTag);
+const categories = menuFilterChoices(visibleProducts).categories;
+function filterHref(category: string | null, tag: string | null) {
+  const params = new URLSearchParams();
+  if (category) params.set('category', category);
+  if (tag) params.set('tag', tag);
+  return `/menu${params.size ? `?${params}` : ''}`;
+}
+---
+<BaseLayout title="Our menu">
+  <main id="main" class="page-content menu-page container">
+    <p class="eyebrow">From the oven & our home kitchen</p>
+    <h1>A menu full of<br /><em>little favourites.</em></h1>
+    <p class="lede">Browse our menu, then chat with us on Instagram to discuss your order.</p>
+    <p class="order-note">{brand.advanceNotice}</p>
+    {unavailable ? <p role="alert">The menu is temporarily unavailable. Please ask us on Instagram.</p>
+      : products.length === 0 ? <p>We’re preparing the online menu. Ask us on Instagram for current flavours, prices, and availability.</p>
+      : <>
+        <nav class="menu-filters" aria-label="Filter menu">
+          <p class="eyebrow">Categories</p>
+          <ul class="category-list" aria-label="Menu categories">
+            <li><a href={filterHref(null, selectedTag)} aria-current={!selectedCategory ? 'true' : undefined}>All categories</a></li>
+            {choices.categories.map((category) => <li><a href={filterHref(category, selectedTag)} aria-current={selectedCategory && menuLabelKey(category) === menuLabelKey(selectedCategory) ? 'true' : undefined}>{category}</a></li>)}
+          </ul>
+          {choices.tags.length > 0 && <><p class="eyebrow">Tags</p><ul class="category-list" aria-label="Menu tags">
+            <li><a href={filterHref(selectedCategory, null)} aria-current={!selectedTag ? 'true' : undefined}>All tags</a></li>
+            {choices.tags.map((tag) => <li><a href={filterHref(selectedCategory, tag)} aria-current={selectedTag && menuLabelKey(tag) === menuLabelKey(selectedTag) ? 'true' : undefined}>{tag}</a></li>)}
+          </ul></>}
+          {(selectedCategory || selectedTag) && <a href="/menu">Clear filters</a>}
+        </nav>
+        {visibleProducts.length === 0 && <p>No products match these filters. <a href="/menu">View all products</a>.</p>}
+        {categories.map((category, index) => <section class="public-menu-category" aria-labelledby={`menu-category-${index}`}>
+          <h2 id={`menu-category-${index}`}>{category}</h2>
+          <div class="public-menu-grid">{visibleProducts.filter((product) => menuLabelKey(product.category) === menuLabelKey(category)).map((product) => <PublicMenuCard product={product} client:load />)}</div>
+        </section>)}
+      </>}
+    <a class="button" href={brand.instagram} target="_blank" rel="noopener noreferrer">Ask about our menu ↗</a>
+  </main>
+</BaseLayout>

@@ -1,0 +1,47 @@
+---
+import '../styles/global.css';
+import { brand } from '../config/brand';
+import ThemeToggle from '../components/ThemeToggle.astro';
+interface Props { title: string; description?: string; workspace?: boolean }
+const { title, description = 'Custom cakes, baked treats, and favourites from Anu’s kitchen.', workspace = false } = Astro.props;
+---
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fff5ef" />
+    <script is:inline>
+      (() => {
+        let theme;
+        try { theme = localStorage.getItem('abh-theme'); } catch {}
+        document.documentElement.dataset.theme = theme === 'dark' || (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      })();
+    </script>
+    <!-- This foundation is not a launched business site. Revisit at launch. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>{title} · {brand.name}</title>
+  </head>
+  <body class:list={[{ 'workspace-body': workspace }]}>
+    <ThemeToggle />
+    <a class="skip-link" href="#main">Skip to content</a>
+    {!workspace && <header class="site-header container">
+      <a class="brand" href="/" aria-label={`${brand.name} home`}>
+        <img src="/images/logo.jpg" alt="" width="80" height="80" />
+        <span>{brand.name}<small>{brand.tagline}</small></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/menu" aria-current={Astro.url.pathname === '/menu' ? 'page' : undefined}>Our menu</a>
+        <a href="/reviews" aria-current={Astro.url.pathname === '/reviews' ? 'page' : undefined}>Kind words</a>
+        <a class="social-link" href={brand.instagram} target="_blank" rel="noopener noreferrer">Find us on Instagram <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>}
+    <slot />
+    {!workspace && <footer class="site-footer container">
+      <p>Made with care. Shared with love.<br /><span>{brand.name}</span></p>
+      <p>{brand.advanceNotice}<br /><a href={brand.instagram} target="_blank" rel="noopener noreferrer">Chat with us on Instagram ↗</a></p>
+    </footer>}
+  </body>
+</html>

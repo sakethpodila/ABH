@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Foundation only. Update deliberately when the public website launches.

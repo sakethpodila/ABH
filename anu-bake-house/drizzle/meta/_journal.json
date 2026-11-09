@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1794112452315,
+      "tag": "0000_massive_bucky",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1794134810119,
+      "tag": "0001_tearful_jack_flag",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794143330787,
+      "tag": "0002_spotty_wiccan",
+      "breakpoints": true
+    }
+  ]
+}

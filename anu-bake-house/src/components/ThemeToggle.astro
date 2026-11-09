@@ -1,0 +1,43 @@
+<button class="theme-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="false" title="Switch to dark mode">
+  <span class="theme-toggle-thumb">
+  <svg class="theme-cupcake" viewBox="0 0 48 48" aria-hidden="true">
+    <g class="cupcake-frosting" stroke="#8d5866" stroke-width="1.6" stroke-linejoin="round">
+      <path fill="#fff5df" d="M10 28C3 23 9 17 15 17c-2-5 3-9 8-9 0-3 2-5 4-6-1 6 9 7 7 14 7 0 11 7 5 12Z"/>
+      <path d="M15 17c3 3 12 4 18 0M11 23c7 3 20 4 27 0" fill="none" stroke="#e8c7b0"/>
+    </g>
+    <path d="m11 28 4 16h19l4-16Z" fill="#d994ad" stroke="#8d5866" stroke-width="1.6"/>
+    <path d="m19 31 2 10m5-10v10m6-10-2 10" stroke="#fff0dc" stroke-width="2" stroke-linecap="round"/>
+    <path class="cupcake-sparkle" d="M41 5v6m-3-3h6" stroke="#fff5df" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <svg class="theme-chocolate" viewBox="0 0 48 48" aria-hidden="true">
+    <g class="chocolate-bar" stroke="#25151a" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M12 3h25v39H12Z" fill="#613b35"/>
+      <path d="M16 7h7v9h-7Zm10 0h7v9h-7ZM16 19h7v9h-7Zm10 0h7v9h-7Z" fill="#805349"/>
+      <path d="m9 27 15 5 16-5-3 17H12Z" fill="#d994ad"/>
+      <path d="m9 27 15 5-9 3Zm31 0-16 5 10 3Z" fill="#fff0dc"/>
+      <path d="m21 37 3 3 3-3" fill="none" stroke="#fff0dc" stroke-width="2"/>
+    </g>
+  </svg>
+  </span>
+</button>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
+  function applyTheme(dark: boolean) {
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    const label = `Switch to ${dark ? 'light' : 'dark'} mode`;
+    toggle?.setAttribute('aria-checked', String(dark));
+    toggle?.setAttribute('title', label);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#24181d' : '#fff5ef');
+  }
+  applyTheme(document.documentElement.dataset.theme === 'dark');
+  toggle?.addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme !== 'dark';
+    applyTheme(dark);
+    try { localStorage.setItem('abh-theme', dark ? 'dark' : 'light'); } catch { /* Theme still works when storage is unavailable. */ }
+  });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+    let saved = null;
+    try { saved = localStorage.getItem('abh-theme'); } catch { /* Use system preference. */ }
+    if (saved !== 'light' && saved !== 'dark') applyTheme(event.matches);
+  });
+</script>

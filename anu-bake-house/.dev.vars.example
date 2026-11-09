@@ -1,0 +1,11 @@
+# Copy to .dev.vars for local development. Never commit real credentials.
+# No flag grants production access: preview also requires Astro dev mode + loopback.
+LOCAL_ADMIN_PREVIEW=false
+
+# Configure real login in a future deployment step; emails are comma separated.
+ACCESS_TEAM_DOMAIN=
+ACCESS_AUD=
+ADMIN_EMAILS=
+
+# Review submission is not implemented in this milestone.
+TURNSTILE_SECRET_KEY=
